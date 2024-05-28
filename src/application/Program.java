@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import db.DB;
+import db.DbException;
 
 public class Program {
 
@@ -25,13 +26,13 @@ public class Program {
 					+ "WHERE "
 					+ "Id = ?");
 			
-			st.setInt(1, 5);
+			st.setInt(1, 2);
 			
 			int rowsAffected = st.executeUpdate();
 			
 			System.out.println("Done! Rows affected: " + rowsAffected);					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.closeStatement(st);
 			DB.closeConnection();
